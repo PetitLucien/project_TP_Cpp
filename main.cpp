@@ -1,5 +1,6 @@
 #include "mbed.h"
 #include "string.h"
+#include "rgb_lcd.hpp"
 
 // Create a DigitalOutput object to toggle an LED whenever data is received.
 static DigitalOut led(LED1);
@@ -7,6 +8,7 @@ AnalogIn   capteur(A0);
 // Create a UnbufferedSerial object with a default baud rate.
 static UnbufferedSerial serial_port(PC_1, PC_0);
 static UnbufferedSerial pc(USBTX, USBRX,9600);
+rgb_lcd lcd(PB_9, PB_8);
 
 //string guess;
 
@@ -78,6 +80,9 @@ int main(void)
 
     // Register a callback to process a Rx (receive) interrupt.
     serial_port.attach(&on_rx_interrupt, SerialBase::RxIrq);
+    lcd.begin(16, 2);           // Initialisation de l'écran avec 16 colonnes et 2 lignes
+    lcd.setRGB(0, 255, 0);      // Définit la couleur de fond sur vert
+    lcd.print("Hello, Mbed!");  // Affiche du texte
 
         while (1) {
         // test the voltage on the initialized analog pin
