@@ -2,8 +2,8 @@
 
 Pifometre::Pifometre() 
     : screen(0, 0, 0, 0, 0, 0),  // Default coordinates
-      distanceSensor(PinName::P0_0),  // Replace with actual pin
-      inputDevice(PinName::P0_1, PinName::P0_2) // Replace with actual TX/RX pins
+      distanceSensor(A0),  // Replace with actual pin
+      inputDevice(PC_1, PC_0) // Replace with actual TX/RX pins
 {
     // Initialization logic
 }

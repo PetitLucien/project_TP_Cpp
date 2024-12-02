@@ -19,6 +19,7 @@ private:
     string getLastMessage(){return this->lastMessage;};
     string getLastGuess(){return this->lastGuess;};
     string getLastPrompt(){return this->lastPrompt;};
+    
 public:
     Ecran(uint8_t Xmessage, uint8_t Ymessage, 
           uint8_t Xguess, uint8_t Yguess, 
