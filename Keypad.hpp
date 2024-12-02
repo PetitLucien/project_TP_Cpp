@@ -1,16 +1,18 @@
 #ifndef KEYPAD_HPP
 #define KEYPAD_HPP
 
-#include "SerialUnbuffer.h"
+#include "mbed.h"
+#include <cstdint>
 
 class Keypad {
-public:
-    Keypad(PinName TX, PinName RX);
-    
-    bool getGuess(char* guess);
-
 private:
-    SerialUnbuffer serialInput;
+    UnbufferedSerial serialInput;
+public:
+    Keypad(PinName TX, PinName RX):serialInput(TX,RX){} ;
+    
+    uint16_t getGuess(char* guess);
+
+
 };
 
 #endif // KEYPAD_HPP
