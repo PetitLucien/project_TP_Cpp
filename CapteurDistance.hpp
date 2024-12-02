@@ -4,14 +4,16 @@
 #include "mbed.h"
 
 class CapteurDistance {
-public:
-    CapteurDistance(PinName pin);
-    ~CapteurDistance();
+    private:
+        AnalogIn capteur;
+        PinName pin{A0};
+    public:
+        CapteurDistance(PinName pin);
+        ~CapteurDistance()=default;
+        void initCapteur(){AnalogIn capteur(this->pin);}
+        uint16_t getDistance(){return uint16_t(capteur.read_u16()*0.01998425);};
 
-    uint16_t getDistance();
 
-private:
-    AnalogIn capteur;
 };
 
 #endif // CAPTEUR_DISTANCE_HPP
