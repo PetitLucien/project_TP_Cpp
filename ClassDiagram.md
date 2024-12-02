@@ -5,7 +5,15 @@ classDiagram
     }
 
     class Ecran {
-    
+        -coordMessage[2] uint8_t
+        -coordGuess[2] uint8_t
+        -coordPrompt[2] uint8_t
+        +Ecran(uint8_t Xmessage,uint8_t Ymessage,uint8_t Xguess, uint8_t Yguess, v Xprompt, uint8_t Yprompt)
+        ~Ecran()
+        +writeMessage(char* message)
+        +writeGuess(char* guess)
+        +writePrompt(char* prompt)
+        
     }
 
     class rgb_lcd {
@@ -25,25 +33,32 @@ classDiagram
     }
 
     class SerialUnbuffer ~mbed~ {
-        
+        +SerialUnbuffer(PinName_TX, PinName_RX)
+        +read()
+        +readable()
     }
     class Keypad{
-
+        keypad SerialUnbuffer
+        +getGuess(char*) 
     }
     class AnalogIN~mbed~{
-
+        +AnalogIn(pinname)
+        +read_u16()
     }
-    class Capteur{
-        
+    class CapteurDistance{
+        -capteur AnalogIn
+        +CapteurDistance(Pinname)
+        ~CapeteurDistance()
+        +getDistance() uint16_t
     }
 
     Pifometre *--  Ecran : contient
-    Pifometre *--  Capteur : contient
+    Pifometre *--  CapteurDistance : contient
     Pifometre *--  Keypad : contient
     Ecran *-- rgb_lcd 
     rgb_lcd *-- I2C
-    SerialUnbuffer --> Keypad
-    AnalogIN --> Capteur
+    Keypad *-- SerialUnbuffer
+    CapteurDistance *-- AnalogIN
 
 
 
