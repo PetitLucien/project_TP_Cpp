@@ -13,5 +13,6 @@ Pifometre::~Pifometre() {
 }
 
 void Pifometre::run() {
-    // Main execution logic will go here
+    distanceSensor.getDistance();
+    
 }
