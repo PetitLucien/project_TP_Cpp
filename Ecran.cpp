@@ -23,19 +23,19 @@ Ecran::~Ecran() {
 void Ecran::writeMessage(string message) {
     Ecran::setLastMessage(message);
     display.setCursor(coordMessage[0], coordMessage[1]);
-    display.print(message);
+    display.print(message.c_str());
 }
 
 void Ecran::writeGuess(string guess) {
     Ecran::setLastGuess(guess);
     display.setCursor(coordGuess[0], coordGuess[1]);
-    display.print(guess);
+    display.print(guess.c_str());
 }
 
 void Ecran::writePrompt(string prompt) {
     Ecran::setLastPrompt(prompt);
     display.setCursor(coordPrompt[0], coordPrompt[1]);
-    display.print(prompt);
+    display.print(prompt.c_str());
 }
 
 void Ecran::clearDisplay() {

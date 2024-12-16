@@ -63,6 +63,13 @@ void rgb_lcd::setColorWhite() {
     // Set the backlight color to white (R = 255, G = 255, B = 255)
     setRGB(255, 255, 255);
 }
+void rgb_lcd::setCursor(uint8_t col, uint8_t row) {
+
+    col = (row == 0 ? col | 0x80 : col | 0xc0);
+    char dta[2] = {0x80, col};
+    _i2c.write(LCD_ADDRESS << 1, dta, 2);
+
+}
 
 void rgb_lcd::display() {
     _displaycontrol |= LCD_DISPLAYON;
