@@ -14,7 +14,7 @@ public:
     Keypad(PinName TX, PinName RX):serialInput(TX,RX){} ;
     
     
-    int16_t getGuess(std::string &guess);
+    uint16_t getGuess(std::string &guess);
 
 
 

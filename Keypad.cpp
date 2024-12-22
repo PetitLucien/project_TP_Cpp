@@ -15,29 +15,29 @@ char Keypad::getChar(){
                     return '2';
                     break;
                 case 0xE3 :
-                    return '2';
+                    return '3';
                     break;
                 case 0xE4 :
-                    return '2';
+                    return '4';
                     break;
                 case 0xE5 :
-                    return '2';
+                    return '5';
                     break;
                 case 0xE6 :
-                    return '2';
+                    return '6';
                     break;
                 case 0xE7 :
-                    return '2';
+                    return '7';
                     break;
                 case 0xE8 :
-                    return '2';
+                    return '8';
                     break;
                 case 0xE9 :
-                    return '2';
+                    return '9';
                     break;
-                case 0xEA :
+                /*case 0xEA :
                     return '*';
-                    break;
+                    break;*/
                 case 0xEB :
                     return '0';
                     break;
@@ -45,7 +45,7 @@ char Keypad::getChar(){
                     return '#';
                     break;
                 default:
-                c=0x00;
+                c='#';
                     break;
             }
     }
@@ -53,16 +53,16 @@ char Keypad::getChar(){
     return c;
 }
 
-int16_t Keypad::getGuess(std::string &guess) {
+uint16_t Keypad::getGuess(std::string &guess) {
     
-    // Read the data to clear the receive interrupt.
-
     while (guess[guess.size()-1]!='#') {
         if (serialInput.readable()) {
             guess.append(1,this->getChar());
         }
     }
     guess.pop_back();
+    if(guess.size()==1){guess.append(1,'0');}
+
     return std::stoi( guess );
     
 }

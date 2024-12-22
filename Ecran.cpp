@@ -13,7 +13,9 @@ Ecran::Ecran(uint8_t Xmessage, uint8_t Ymessage,
     coordPrompt[1] = Yprompt;
 
     // Initialize display
-    display.begin(16, 2);  
+    display.begin(16, 2); 
+    display.setRGB(0,0,255); // set back coler to blue
+    display.clear(); 
 }
 
 Ecran::~Ecran() {
@@ -21,25 +23,43 @@ Ecran::~Ecran() {
 }
 
 void Ecran::writeMessage(string message) {
+    int8_t diff{0};
+    diff=getLastMessage().size()-message.size();
     Ecran::setLastMessage(message);
+    if(diff>0){
+        message.append(diff,' ');
+    }
+       
     display.setCursor(coordMessage[0], coordMessage[1]);
     display.print(message.c_str());
 }
 
 void Ecran::writeGuess(string guess) {
+
+    int8_t diff{0};
+    diff=getLastGuess().size()-guess.size();
     Ecran::setLastGuess(guess);
+    if(diff>0){
+        guess.append(diff,' ');
+    }
+
     display.setCursor(coordGuess[0], coordGuess[1]);
     display.print(guess.c_str());
 }
 
 void Ecran::writePrompt(string prompt) {
+    int8_t diff{0};
+    diff=getLastPrompt().size()-prompt.size();
     Ecran::setLastPrompt(prompt);
+    if(diff>0){
+        prompt.append(diff,' ');
+    }
     display.setCursor(coordPrompt[0], coordPrompt[1]);
     display.print(prompt.c_str());
 }
 
 void Ecran::clearDisplay() {
-    display.clear();  // Assumes the rgb_lcd class has a clear() method
+    display.clear();  
 }
 
 void Ecran::clearMessage() {
@@ -49,7 +69,7 @@ void Ecran::clearMessage() {
 }
 
 void Ecran::clearGuess() {
-   display.clear();
+    display.clear();
     Ecran::writeMessage(getLastMessage());
     Ecran::writePrompt(getLastPrompt());
 }

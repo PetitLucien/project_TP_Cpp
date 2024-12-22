@@ -13,12 +13,12 @@ private:
     string lastGuess;
     string lastPrompt;
     rgb_lcd display;
-    void setLastMessage(string message){this->lastMessage=message;};
-    void setLastGuess(string guess){this->lastGuess=guess;};
-    void setLastPrompt(string prompt){this->lastPrompt=prompt;};
-    string getLastMessage(){return this->lastMessage;};
-    string getLastGuess(){return this->lastGuess;};
-    string getLastPrompt(){return this->lastPrompt;};
+    void setLastMessage(string message){this->lastMessage.clear();this->lastMessage=message;};
+    void setLastGuess(string guess){this->lastGuess.clear();this->lastGuess=guess;};
+    void setLastPrompt(string prompt){this->lastPrompt.clear();this->lastPrompt=prompt;};
+    const string getLastMessage(){return this->lastMessage;};
+    const string getLastGuess(){return this->lastGuess;};
+    const string getLastPrompt(){return this->lastPrompt;};
     
 public:
     Ecran(uint8_t Xmessage, uint8_t Ymessage, 
