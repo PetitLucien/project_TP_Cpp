@@ -4,20 +4,37 @@ classDiagram
        -lcd Ecran
        -keypad Keypad
        -capteur CapeteurDistance
+       -guessOK bool
+       -setguessOk()
+       -resetguessOk()
+       -getguessOk()
        +Pifometre()
        ~Pifometre()
        +run()
+       +DistanceVSguess()
+       +Start Screen()
     }
 
     class Ecran {
-        -coordMessage[2] uint8_t
-        -coordGuess[2] uint8_t
-        -coordPrompt[2] uint8_t
-        +Ecran(uint8_t Xmessage,uint8_t Ymessage,uint8_t Xguess, uint8_t Yguess, v Xprompt, uint8_t Yprompt)
-        ~Ecran()
-        +writeMessage(char* message)
-        +writeGuess(char* guess)
-        +writePrompt(char* prompt)
+        -string lastMessage
+        -string lastGuess
+        -string lastPrompt
+        -rgb_lcd display
+        -void setLastMessage(string message)
+        -void setLastGuess(string guess)
+        -void setLastPrompt(string prompt)
+        -const string getLastMessage()
+        -const string getLastGuess()
+        -const string getLastPrompt()
+        +Ecran(uint8_t Xmessage, uint8_t Ymessage, uint8_t Xguess, uint8_t Yguess, uint8_t Xprompt, uint8_t Yprompt)
+        +~Ecran()
+        +void writeMessage(string message)
+        +void writeGuess(string guess)
+        +void writePrompt(string prompt)
+        +void clearDisplay()
+        +void clearMessage()
+        +void clearGuess()
+        +void clearPrompt()
         
     }
 
@@ -31,7 +48,6 @@ classDiagram
         + void print(const char* str)
         + void writeChar(char c)
         + void setRGB(uint8_t r, uint8_t g, uint8_t b)
-        + void setColor(uint8_t color)
     }
     class I2C ~mbed~{
 
@@ -43,8 +59,10 @@ classDiagram
         +readable()
     }
     class Keypad{
-        -keypad SerialUnbuffer
-        +getGuess(char*) 
+        -UnbufferedSerial serialInput
+        -char getChar()
+        +Keypad(PinName TX, PinName RX)
+        +uint16_t getGuess(string& guess)
     }
     class AnalogIN~mbed~{
         +AnalogIn(pinname)
