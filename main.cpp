@@ -10,9 +10,13 @@ int main(void)
 {   
     DigitalIn bp(BUTTON1);
     Pifometre monPifometre;
+    monPifometre.StartScreen();
     while (1) {
+        
         if(bp==0){
             monPifometre.run();
+            ThisThread::sleep_for(10s); 
+            monPifometre.StartScreen();
         }
         
     }

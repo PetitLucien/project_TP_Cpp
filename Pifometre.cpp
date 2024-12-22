@@ -31,7 +31,8 @@ void Pifometre::run() {
         DistanceVSguess(distanceSensor.getDistance(),intguess);
         ThisThread::sleep_for(2s);
     }
-    this->resetguessOk();   
+    this->resetguessOk();
+      
 }
 
 
@@ -65,4 +66,13 @@ void Pifometre::DistanceVSguess(uint16_t distance, int16_t guess){
         screen.writeMessage("Vraiment pas bon");
     }
        
+}
+
+void Pifometre::StartScreen()
+{
+    
+    screen.clearDisplay();
+    screen.writeMessage("   Press USER   ");
+    screen.writePrompt ("    To start    ");
+
 }
